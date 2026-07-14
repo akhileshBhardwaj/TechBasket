@@ -8,7 +8,7 @@ import {
   Heart,
 } from "lucide-react";
 
-const navLinks = ["Home", "Shop", "Categories", "Deals", "Contact"];
+const navLinks = ["Home", "Shop", "Deal", "About us", "Contact"];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
