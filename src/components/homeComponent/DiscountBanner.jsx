@@ -10,7 +10,7 @@ const DiscountBanner = () => {
         {/* First Banner */}
         <div className=" relative">
           <img src={banner1} alt="Banner 1" className="w-full rounded-xl" />
-          <div className=" absolute top-1 md:top-1/4 left-4">
+          <div className=" absolute top-2 md:top-1/4 left-4">
             <h1 className=" text-xl font-medium md:text-3xl md:font-semibold">Freshly Baked Buns</h1>
             <p className="text-gray-500 font-light mt-1 md:text-2xl md:font-medium md:mt-2 ">
                 Get Upto <span className="text-emerald-500">25% </span> Off
