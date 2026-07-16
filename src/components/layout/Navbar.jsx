@@ -7,8 +7,15 @@ import {
   X,
   Heart,
 } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
-const navLinks = ["Home", "Shop", "Deal", "About us", "Contact"];
+const navLinks = [
+  { name: "Home", path: "/" },
+  { name: "Shop", path: "/shop" },
+  { name: "Deal", path: "/deal" },
+  { name: "About Us", path: "/about" },
+  { name: "Contact", path: "/contact" },
+];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -19,54 +26,53 @@ const Navbar = () => {
       <nav className="sticky top-0 z-50 bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto h-16 px-5 flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center gap-2 cursor-pointer">
+          <NavLink to="/" className="flex items-center gap-2">
             <ShoppingCart className="text-emerald-600" size={28} />
 
             <h1 className="text-2xl font-bold">
               Tech
               <span className="text-emerald-600">Basket</span>
             </h1>
-          </div>
+          </NavLink>
 
           {/* Desktop Menu */}
           <ul className="hidden lg:flex items-center gap-8 font-medium">
             {navLinks.map((item) => (
-              <li
-                key={item}
-                className="cursor-pointer hover:text-emerald-600 transition-all duration-300"
-              >
-                {item}
+              <li key={item.path}>
+                <NavLink
+                  to={item.path}
+                  className={({ isActive }) =>
+                    `transition-all duration-300 ${
+                      isActive
+                        ? "text-emerald-600 font-semibold"
+                        : "hover:text-emerald-600"
+                    }`
+                  }
+                >
+                  {item.name}
+                </NavLink>
               </li>
             ))}
           </ul>
 
           {/* Desktop Right */}
           <div className="hidden lg:flex items-center gap-5">
-            {/* Search */}
-
             <div className="flex items-center w-72 border rounded-full px-4 py-2">
               <input
                 type="text"
                 placeholder="Search Products..."
                 className="w-full outline-none"
               />
-
               <Search className="text-gray-500 cursor-pointer" size={20} />
             </div>
-
-            {/* Wishlist */}
 
             <button className="hover:text-red-500 transition">
               <Heart size={22} />
             </button>
 
-            {/* User */}
-
             <button className="hover:text-emerald-600 transition">
               <CircleUserRound size={24} />
             </button>
-
-            {/* Cart */}
 
             <button className="relative">
               <ShoppingCart size={24} />
@@ -78,7 +84,6 @@ const Navbar = () => {
           </div>
 
           {/* Mobile */}
-
           <button className="lg:hidden" onClick={() => setOpen(true)}>
             <Menu size={30} />
           </button>
@@ -86,7 +91,6 @@ const Navbar = () => {
       </nav>
 
       {/* ================= Overlay ================= */}
-
       <div
         onClick={() => setOpen(false)}
         className={`fixed inset-0 bg-black/40 z-40 transition-all duration-300 ${
@@ -95,33 +99,33 @@ const Navbar = () => {
       />
 
       {/* ================= Drawer ================= */}
-
       <div
         className={`fixed top-0 left-0 h-screen w-80 bg-white z-50 shadow-2xl transition-all duration-300 ${
           open ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* Drawer Header */}
-
+        {/* Header */}
         <div className="flex items-center justify-between border-b p-5">
-          <div className="flex items-center gap-2">
+          <NavLink
+            to="/"
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-2"
+          >
             <ShoppingCart className="text-emerald-600" size={28} />
 
             <h2 className="text-2xl font-bold">
               Tech
               <span className="text-emerald-600">Basket</span>
             </h2>
-          </div>
+          </NavLink>
 
           <button onClick={() => setOpen(false)}>
             <X size={28} />
           </button>
         </div>
 
-        {/* Drawer Body */}
-
+        {/* Body */}
         <div className="p-5">
-          {/* PART-2 */}
           {/* Search */}
           <div className="mb-4">
             <div className="flex items-center border border-gray-300 rounded-lg px-3 py-2">
@@ -166,12 +170,20 @@ const Navbar = () => {
 
             <ul className="space-y-1">
               {navLinks.map((item) => (
-                <li
-                  key={item}
-                  onClick={() => setOpen(false)}
-                  className="cursor-pointer px-3 py-2 text-sm rounded-lg hover:bg-emerald-50 hover:text-emerald-600 transition"
-                >
-                  {item}
+                <li key={item.path}>
+                  <NavLink
+                    to={item.path}
+                    onClick={() => setOpen(false)}
+                    className={({ isActive }) =>
+                      `block px-3 py-2 rounded-lg transition ${
+                        isActive
+                          ? "bg-emerald-100 text-emerald-600 font-semibold"
+                          : "hover:bg-emerald-50 hover:text-emerald-600"
+                      }`
+                    }
+                  >
+                    {item.name}
+                  </NavLink>
                 </li>
               ))}
             </ul>
