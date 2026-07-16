@@ -21,7 +21,7 @@ const PopularProduct = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto my-10">
+      <div className="max-w-7xl w-full mx-auto my-10">
         {/* Heading */}
         <div className="my-7">
           <h2 className="text-2xl font-semibold  ">Popular Products</h2>
